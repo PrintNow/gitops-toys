@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shine-ech0
+  labels:
+    app: shine-ech0
+spec:
+  minReadySeconds: 5 # 最小就绪秒数
+  replicas: 1 # 副本数
+  revisionHistoryLimit: 4
+  selector:
+    matchLabels:
+      app: shine-ech0
+  strategy:
+    type: RollingUpdate # 设置更新规则为滚动更新
+    rollingUpdate:
+      maxSurge: 1 # 滚动更新时会先启动一个pod
+      maxUnavailable: 0 # 滚动更新时最大Unavailable的pod 个数
+  template:
+    metadata:
+      labels:
+        app: shine-ech0
+    spec:
+      terminationGracePeriodSeconds: 60 # 终止时间
+      containers:
+        - name: ech0
+          image: sn0wl1n/ech0:latest
+          ports:
+            - containerPort: 6277
+          env:
+            - name: JWT_SECRET
+              value: "752b9118-16ff-41c1-9d1c-1871249269a1"
+          resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi

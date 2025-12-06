@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: shine-ech0-svc
+spec:
+  selector:
+    app: shine-ech0
+  ports:
+    - protocol: TCP
+      name: api
+      port: 80
+      targetPort: 9999
