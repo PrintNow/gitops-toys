@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: shine-ech0-ingress
+  # 会自动继承 argo
+  # namespace: default  # 根据你的 Service 所在命名空间修改
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {}
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: shine-ech0.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: shine-ech0-svc
+                port:
+                  number: 80
