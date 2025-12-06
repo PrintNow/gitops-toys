@@ -5,8 +5,13 @@ kind: Kustomization
 
 resources:
   - ../../base
-  - hpa-patch.yaml
 
 images:
   - name: sn0wl1n/ech0
     newTag: v3.0.3
+
+patches:
+  - path: hpa-patch.yaml
+    target:
+      kind: HorizontalPodAutoscaler
+      name: shine-ech0-hpa
