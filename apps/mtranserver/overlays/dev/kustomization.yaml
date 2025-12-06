@@ -3,7 +3,7 @@ resources:
 
 images:
   - name: xxnuo/mtranserver
-    newTag: latest-dev
+    newTag: latest
 
 replicas:
   - name: mtranserver
