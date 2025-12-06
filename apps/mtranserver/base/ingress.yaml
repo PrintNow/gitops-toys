@@ -7,7 +7,7 @@ metadata:
     # 可选：TLS、rewrite等
 spec:
   rules:
-    - host: mtran.example.com
+    - host: mtranserver.local
       http:
         paths:
           - path: /
