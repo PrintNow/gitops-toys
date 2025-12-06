@@ -1,0 +1,10 @@
+resources:
+  - ../../base
+
+images:
+  - name: xxnuo/mtranserver
+    newTag: latest-dev
+
+replicas:
+  - name: mtranserver
+    count: 2

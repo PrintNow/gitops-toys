@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mtranserver
+  labels:
+    app: mtranserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mtranserver
+  template:
+    metadata:
+      labels:
+        app: mtranserver
+    spec:
+      containers:
+        - name: mtranserver
+          image: xxnuo/mtranserver:latest
+          ports:
+            - containerPort: 8989
+          env:
+            - name: MT_HOST
+              value: "0.0.0.0"
+            - name: MT_PORT
+              value: "8989"
+            - name: MT_ENABLE_UI
+              value: "true"
+            - name: MT_OFFLINE
+              value: "false"
+            # - name: MT_API_TOKEN
+            #   valueFrom:
+            #     secretKeyRef:
+            #       name: mtranserver-secret
+            #       key: MT_API_TOKEN
+          volumeMounts:
+            - name: models
+              mountPath: /app/models
+      volumes:
+        - name: models
+          hostPath:           # 如果是开发环境，hostPath 可以挂载本地
+            path: ./models
+            type: Directory
