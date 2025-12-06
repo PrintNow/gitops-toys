@@ -5,6 +5,7 @@ kind: Kustomization
 
 resources:
   - ../../base
+  - hpa-patch.yaml
 
 images:
   - name: sn0wl1n/ech0
