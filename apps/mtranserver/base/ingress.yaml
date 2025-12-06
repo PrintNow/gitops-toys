@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mtranserver-ingress
+#  annotations:
+#    kubernetes.io/ingress.class: nginx  # 适用于 nginx ingress controller
+    # 可选：TLS、rewrite等
+spec:
+  rules:
+    - host: mtran.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: mtranserver
+                port:
+                  number: 8989
+  # 可选 TLS
+  # tls:
+  #   - hosts:
+  #       - mtran.example.com
+  #     secretName: mtranserver-tls
