@@ -33,11 +33,3 @@ spec:
             #     secretKeyRef:
             #       name: mtranserver-secret
             #       key: MT_API_TOKEN
-          volumeMounts:
-            - name: models
-              mountPath: /app/models
-      volumes:
-        - name: models
-          hostPath:           # 如果是开发环境，hostPath 可以挂载本地
-            path: ./models
-            type: Directory
